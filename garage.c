@@ -388,7 +388,8 @@ int main() {
 
 
             } else {
-                printf("All done! \n \n");
+                printf("Okay then! \n \n");
+                
             }
 
 
@@ -406,16 +407,18 @@ int main() {
 
         } else if(choice == 5) {
 
-            // Sort Functionality
+            printf("Sorry, I was unable to accomplish :( \n");
 
 
         } 
 
 
 
+
     } else if(startOption == 2) {
 
-        // Loading a file
+        // Loading a file //
+
 
         FILE *fptr;
         char filename[50];
@@ -499,7 +502,7 @@ int main() {
 
 
                 printf("\n------------------   Loaded File Invoice   -----------------\n\n");
-                
+
 
                 move = start;
 
