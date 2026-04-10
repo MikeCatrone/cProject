@@ -321,7 +321,7 @@ int main() {
 
             }
 
-            
+
             // For the very last entry only
 
             printf("Mechanic: %s | Garage: %s | Year: %d | Make: %s | Model: %s | Owner: %s \n \n", move->mechanicName, move->garageName, move->year, move->make, move->model, move->owner);
@@ -340,20 +340,32 @@ int main() {
         } else if(choice == 9) {
 
             // Exits Program
-
             printf("\nGoodbye!\n");
             return 0;
 
-        } else if(choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7 || choice == 8) {
+        } else if(choice == 2 || choice == 3 || choice == 4 || choice == 7 || choice == 8) {
 
             // Not available in this build
             printf("\nSorry, not available right now\n");
             return 0;
 
+        } else if(choice == 5) {
+
+            // Save to file functionality
+
+
+        } else if(choice == 6) {
+
+            // Sort alphabetically functionality
+
         }
 
 
-    } 
+    } else if(startOption == 2) {
+
+        // Load save file functionality
+
+    }
 
 
 
