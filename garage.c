@@ -64,7 +64,7 @@ int main() {
         printf("2. Browse Entries\n");
         printf("3. Modify Entry\n");
         printf("4. Delete Entry\n");
-        printf("5. Save Eata\n");
+        printf("5. Save Data\n");
         printf("6. Sort Alphabetical\n");
         printf("7. Search a Person\n");
         printf("8. Tally Earnings\n");
@@ -165,6 +165,10 @@ int main() {
                     scanf("%f", &start->laborHours);
 
                     while ((c = getchar()) != '\n' && c != EOF);
+
+
+                    // Final cost
+                    start->finalCost = start->laborHours * 40;
 
 
                     start->next = NULL;
@@ -273,6 +277,10 @@ int main() {
                     while ((c = getchar()) != '\n' && c != EOF);
 
 
+                    // Final cost
+                    new->finalCost = new->laborHours * 40;
+
+
                     //marks end of the current list
                     new->next = NULL; 
 
@@ -280,7 +288,7 @@ int main() {
                 }
 
 
-
+                // Asks if you would like to create a new order
                 puts("Create new node? (y/n)");
                 scanf("%c", &keepGoing);
 
@@ -290,39 +298,81 @@ int main() {
             }
 
 
-            // Print output //
+            // Print Invoice Output //
 
-            printf("\nLoop Complete \n\n");
+            printf("\n------------------   Invoice   -----------------\n\n");
 
             move = start;
 
+            // Starts from the first entry, then moves through the linked list chain untill the end
+
             while(move->next != NULL) {
-                printf("Mechanic: %s  | Garage:  %s  | Year:  %d  | Make:  %s | Model: %s | Owner: %s \n \n", move->mechanicName, move->garageName, move->year, move->make, move->model, move->owner);
+
+                printf("Mechanic: %s  | Garage: %s  | Year: %d  | Make: %s | Model: %s | Owner: %s \n \n", move->mechanicName, move->garageName, move->year, move->make, move->model, move->owner);
+                printf("Problem: %s \n", move->problem);
+                printf("Part Needed: %s \n", move->partNeeded);
+                printf("Part Cost: %.2f \n", move->partCost);
+                printf("Hours Labored: %.2f\n", move->laborHours);
+                printf("Final Cost: $%.2f \n \n", move->finalCost);
+
+                printf("-------------------------------------------------------------------\n\n");
+
                 move = move->next;
 
             }
 
-            printf("Mechanic: %s  | Garage:  %s  | Year:  %d  | Make:  %s | Model: %s | Owner: %s \n \n", move->mechanicName, move->garageName, move->year, move->make, move->model, move->owner);
-            move = move->next;
+            
+            // For the very last entry only
+
+            printf("Mechanic: %s | Garage: %s | Year: %d | Make: %s | Model: %s | Owner: %s \n \n", move->mechanicName, move->garageName, move->year, move->make, move->model, move->owner);
+            printf("Problem: %s \n", move->problem);
+            printf("Part Needed: %s \n", move->partNeeded);
+            printf("Part Cost: %.2f \n", move->partCost);
+            printf("Hours Labored: %.2f\n", move->laborHours);
+            printf("Final Cost: $%.2f \n \n", move->finalCost);
+
+            printf("------------------------------------------------------\n\n");
+
 
             printf("End of List\n\n");
 
-          
 
+        } else if(choice == 9) {
+
+            // Exits Program
+
+            printf("\nGoodbye!\n");
+            return 0;
+
+        } else if(choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7 || choice == 8) {
+
+            // Not available in this build
+            printf("\nSorry, not available right now\n");
+            return 0;
 
         }
 
 
-    } else if(startOption == 9) {
+    } 
 
 
-        return 0;
 
+    // Memory Release
+
+    move = start;
+
+    while (move->next != NULL) {
+        //before we free the node, we need to share where we need to go next
+        struct Garage *nextNode = move->next;
+        free(move);
+
+        move = nextNode;
     }
 
+    free(move);
 
+    puts("memory clean");
 
-    free(start);
     return 0;
 
 
