@@ -42,6 +42,7 @@ int main() {
     int startOption;
 
     char keepGoing = 'y';
+    char shouldSave;
 
 
 
@@ -64,11 +65,10 @@ int main() {
         printf("2. Browse Entries\n");
         printf("3. Modify Entry\n");
         printf("4. Delete Entry\n");
-        printf("5. Save Data\n");
-        printf("6. Sort Alphabetical\n");
-        printf("7. Search a Person\n");
-        printf("8. Tally Earnings\n");
-        printf("9. Exit\n \n");
+        printf("5. Sort Alphabetical\n");
+        printf("6. Search a Person\n");
+        printf("7. Tally Earnings\n");
+        printf("8. Exit\n \n");
         printf("Selection: ");
         scanf("%d", &choice);
 
@@ -334,16 +334,66 @@ int main() {
             printf("------------------------------------------------------\n\n");
 
 
-            printf("End of List\n\n");
+
+            // Asks if you would like to save
+            puts("\nWould you like to save your progress? (y/n) \n");
+            scanf("%c", &shouldSave);
+
+            if(shouldSave == 'y') {
+
+                // Save to file functionality
+                FILE *fptr;
+                char filename[50];
+
+                printf("Enter the filename to save (e.g., garage_data.txt): ");
+                scanf("%s", filename);
+
+                // Open file for writing
+                fptr = fopen(filename, "w");
+
+                if (fptr == NULL) {
+                    printf("Error: Could not create file!\n");
+                } else {
+                    move = start;
+                    int count = 0;
+
+                    // Traverse the list and write each node to the file
+                    while (move != NULL) {
+                        fprintf(fptr, "%s\n%s\n%d\n%s\n%s\n%s\n%s\n%s\n%.2f\n%.2f\n%.2f\n",
+                                move->mechanicName,
+                                move->garageName,
+                                move->year,
+                                move->make,
+                                move->model,
+                                move->owner,
+                                move->problem,
+                                move->partNeeded,
+                                move->partCost,
+                                move->laborHours,
+                                move->finalCost);
+                        
+                        move = move->next;
+                        count++;
+                    }
+
+                    fclose(fptr);
+                    printf("\nSuccess! %d entries saved to %s.\n", count, filename);
+
+                }
 
 
-        } else if(choice == 9) {
+            } else {
+                printf("All done! \n \n");
+            }
+
+
+        } else if(choice == 8) {
 
             // Exits Program
             printf("\nGoodbye!\n");
             return 0;
 
-        } else if(choice == 2 || choice == 3 || choice == 4 || choice == 7 || choice == 8) {
+        } else if(choice == 2 || choice == 3 || choice == 4 || choice == 6 || choice == 7) {
 
             // Not available in this build
             printf("\nSorry, not available right now\n");
@@ -351,19 +401,17 @@ int main() {
 
         } else if(choice == 5) {
 
-            // Save to file functionality
+            // Sort Functionality
 
 
-        } else if(choice == 6) {
-
-            // Sort alphabetically functionality
-
-        }
+        } 
 
 
     } else if(startOption == 2) {
 
-        // Load save file functionality
+        // Load save text file functionality
+
+
 
     }
 
@@ -381,6 +429,7 @@ int main() {
         move = nextNode;
     }
 
+    
     free(move);
 
     puts("memory clean");
