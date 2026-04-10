@@ -335,7 +335,11 @@ int main() {
 
 
 
-            // Asks if you would like to save
+
+            // ------ Save Functionality -------- //
+
+
+            // Asks if you would like to save after printing invoice
             puts("\nWould you like to save your progress? (y/n) \n");
             scanf("%c", &shouldSave);
 
@@ -353,6 +357,7 @@ int main() {
 
                 if (fptr == NULL) {
                     printf("Error: Could not create file!\n");
+
                 } else {
                     move = start;
                     int count = 0;
@@ -407,12 +412,134 @@ int main() {
         } 
 
 
+
     } else if(startOption == 2) {
 
-        // Load save text file functionality
+        // Loading a file
+
+        FILE *fptr;
+        char filename[50];
+        char line[200]; // Buffer to hold one line at a time
+
+        printf("Enter the filename to load: ");
+        scanf("%s", filename);
+        getchar(); // Clean the newline left by scanf
+
+        fptr = fopen(filename, "r");
+
+        if (fptr == NULL) {
+            printf("Error: Could not open file!\n");
+
+        } else {
+            // Read the first line. If it exists, start the loop.
+            while (fgets(line, sizeof(line), fptr)) {
+                
+                struct Garage *newNode = (struct Garage*)malloc(sizeof(struct Garage));
+                
+                // 1. Mechanic Name (already read into 'line' by the while condition)
+                line[strcspn(line, "\n")] = 0; // Remove newline
+                strcpy(newNode->mechanicName, line);
+
+                // 2. Garage Name
+                fgets(line, sizeof(line), fptr);
+                line[strcspn(line, "\n")] = 0;
+                strcpy(newNode->garageName, line);
+
+                // 3. Year (Read as string, convert to int)
+                fgets(line, sizeof(line), fptr);
+                newNode->year = atoi(line);
+
+                // 4. Make
+                fgets(line, sizeof(line), fptr);
+                line[strcspn(line, "\n")] = 0;
+                strcpy(newNode->make, line);
+
+                // 5. Model
+                fgets(line, sizeof(line), fptr);
+                line[strcspn(line, "\n")] = 0;
+                strcpy(newNode->model, line);
+
+                // 6. Owner
+                fgets(line, sizeof(line), fptr);
+                line[strcspn(line, "\n")] = 0;
+                strcpy(newNode->owner, line);
+
+                // 7. Problem
+                fgets(line, sizeof(line), fptr);
+                line[strcspn(line, "\n")] = 0;
+                strcpy(newNode->problem, line);
+
+                // 8. Part Needed
+                fgets(line, sizeof(line), fptr);
+                line[strcspn(line, "\n")] = 0;
+                strcpy(newNode->partNeeded, line);
+
+                // 9. Costs & Hours (Read as string, convert to float)
+                fgets(line, sizeof(line), fptr);
+                newNode->partCost = atof(line);
+
+                fgets(line, sizeof(line), fptr);
+                newNode->laborHours = atof(line);
+
+                fgets(line, sizeof(line), fptr);
+                newNode->finalCost = atof(line);
+
+                newNode->next = NULL;
+
+                // Link the node to the list
+                if (start == NULL) {
+                    start = newNode;
+                } else {
+                    move = start;
+                    while (move->next != NULL) {
+                        move = move->next;
+                    }
+                    move->next = newNode;
+                }
+
+
+                printf("\n------------------   Loaded File Invoice   -----------------\n\n");
+                
+
+                move = start;
+
+                // Starts from the first entry, then moves through the linked list chain untill the end
+
+                while(move->next != NULL) {
+
+                    printf("Mechanic: %s  | Garage: %s  | Year: %d  | Make: %s | Model: %s | Owner: %s \n \n", move->mechanicName, move->garageName, move->year, move->make, move->model, move->owner);
+                    printf("Problem: %s \n", move->problem);
+                    printf("Part Needed: %s \n", move->partNeeded);
+                    printf("Part Cost: %.2f \n", move->partCost);
+                    printf("Hours Labored: %.2f\n", move->laborHours);
+                    printf("Final Cost: $%.2f \n \n", move->finalCost);
+
+                    printf("-------------------------------------------------------------------\n\n");
+
+                    move = move->next;
+
+                }
+
+
+                // For the very last entry only
+
+                printf("Mechanic: %s | Garage: %s | Year: %d | Make: %s | Model: %s | Owner: %s \n \n", move->mechanicName, move->garageName, move->year, move->make, move->model, move->owner);
+                printf("Problem: %s \n", move->problem);
+                printf("Part Needed: %s \n", move->partNeeded);
+                printf("Part Cost: %.2f \n", move->partCost);
+                printf("Hours Labored: %.2f\n", move->laborHours);
+                printf("Final Cost: $%.2f \n \n", move->finalCost);
+
+                printf("------------------------------------------------------\n\n");
 
 
 
+            }
+
+            fclose(fptr);
+            printf("Success! Data loaded from %s.\n", filename);
+
+        }
     }
 
 
