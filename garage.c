@@ -50,7 +50,10 @@ int main() {
     // For name search
     char searchName[50];
     int searchFound = 0;
-   
+
+
+    // For Total Garage Sales
+    double totalEarnings = 0;
 
 
 
@@ -185,8 +188,7 @@ int main() {
 
 
                         // Final cost
-                        start->finalCost = start->laborHours * 40;
-
+                        start->finalCost = start->partCost;
 
                         start->next = NULL;
 
@@ -295,7 +297,7 @@ int main() {
 
 
                         // Final cost
-                        new->finalCost = new->laborHours * 40;
+                        new->finalCost = new->partCost;
 
 
                         //marks end of the current list
@@ -352,6 +354,7 @@ int main() {
 
 
 
+
             // For exiting application
             } else if(choice == 9) {
 
@@ -360,7 +363,7 @@ int main() {
                 return 0;
 
 
-            } else if(choice == 3 || choice == 4 || choice == 6 || choice == 8) {
+            } else if(choice == 3 || choice == 4 || choice == 6) {
 
                 // Not available in this build
                 printf("\nSorry, not available right now\n");
@@ -539,6 +542,28 @@ int main() {
 
 
 
+
+            } else if(choice == 8) {
+
+                move = start;
+
+                // Starts from the first entry, then moves through the linked list chain untill the end
+
+                while(move->next != NULL) {
+
+                    totalEarnings += move->finalCost;
+                    
+                    move = move->next;
+
+                }
+
+
+                // For the very last entry only
+
+                totalEarnings += move->finalCost;
+
+                printf("\n The Total Earnings for the Garage: $ %.2f \n\n", totalEarnings);
+                
 
             }
 
@@ -766,7 +791,7 @@ int main() {
 
 
                         // Final cost
-                        start->finalCost = start->laborHours * 40;
+                        start->finalCost = start->partCost;
 
 
                         start->next = NULL;
@@ -876,7 +901,8 @@ int main() {
 
 
                         // Final cost
-                        new->finalCost = new->laborHours * 40;
+                        new->finalCost = new->partCost;
+
 
 
                         //marks end of the current list
@@ -941,7 +967,7 @@ int main() {
                 return 0;
 
 
-            } else if(choice == 3 || choice == 4 || choice == 6 || choice == 8) {
+            } else if(choice == 3 || choice == 4 || choice == 6) {
 
                 // Not available in this build
                 printf("\nSorry, not available right now\n");
@@ -1120,15 +1146,34 @@ int main() {
 
 
 
+            // Scan through list and add up totals
+            } else if(choice == 8) {
+
+                
+                move = start;
+
+                // Starts from the first entry, then moves through the linked list chain untill the end
+
+                while(move->next != NULL) {
+
+                    totalEarnings += move->finalCost;
+                    
+                    move = move->next;
+
+                }
+
+
+                // For the very last entry only
+
+                totalEarnings += move->finalCost;
+
+                printf("\n The Total Earnings for the Garage: $ %.2f \n\n", totalEarnings);
 
             }
 
 
 
-
         }
-
-
 
 
     }
