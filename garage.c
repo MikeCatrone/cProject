@@ -38,11 +38,19 @@ int main() {
     // For buffer
     int c;
     
+    // Choices
     int choice;
     int startOption;
 
+    // For keeping loop going and for saving
     char keepGoing = 'y';
     char shouldSave;
+
+
+    // For name search
+    char searchName[50];
+    int searchFound = 0;
+   
 
 
 
@@ -352,7 +360,7 @@ int main() {
                 return 0;
 
 
-            } else if(choice == 3 || choice == 4 || choice == 6 || choice == 7 || choice == 8) {
+            } else if(choice == 3 || choice == 4 || choice == 6 || choice == 8) {
 
                 // Not available in this build
                 printf("\nSorry, not available right now\n");
@@ -461,6 +469,72 @@ int main() {
                 } else {
                     printf("Okay then! \n \n");
                     
+                }
+
+
+
+
+            } else if(choice == 7) {
+
+
+                printf("Enter an owner's name: ");
+                scanf("%s", searchName);
+
+                while ((c = getchar()) != '\n' && c != EOF);
+
+
+                move = start;
+
+
+                // Starts from the first entry, then moves through the linked list chain untill the end
+
+                while(move->next != NULL) {
+
+                    if(strcmp(searchName, move->owner) == 0) {
+
+                        printf("\nName Found!\n");
+                        printf("------------------------------\n\n");
+
+                        printf("Mechanic: %s  | Garage: %s  | Year: %d  | Make: %s | Model: %s | Owner: %s \n \n", move->mechanicName, move->garageName, move->year, move->make, move->model, move->owner);
+                        printf("Problem: %s \n", move->problem);
+                        printf("Part Needed: %s \n", move->partNeeded);
+                        printf("Part Cost: %.2f \n", move->partCost);
+                        printf("Hours Labored: %.2f\n", move->laborHours);
+                        printf("Final Cost: $%.2f \n \n", move->finalCost);
+
+                        printf("-------------------------------------------------------------------\n\n");
+
+                        searchFound = 1;
+
+                    }
+
+
+                    move = move->next;
+
+                }
+
+
+                // For the very last entry only
+
+                if(strcmp(searchName, move->owner) == 0) {
+
+                    printf("\nName Found!\n");
+                    printf("-----------------------------\n\n");
+
+                    printf("Mechanic: %s  | Garage: %s  | Year: %d  | Make: %s | Model: %s | Owner: %s \n \n", move->mechanicName, move->garageName, move->year, move->make, move->model, move->owner);
+                    printf("Problem: %s \n", move->problem);
+                    printf("Part Needed: %s \n", move->partNeeded);
+                    printf("Part Cost: %.2f \n", move->partCost);
+                    printf("Hours Labored: %.2f\n", move->laborHours);
+                    printf("Final Cost: $%.2f \n \n", move->finalCost);
+
+                    printf("-------------------------------------------------------------------\n\n");
+
+                } else if(searchFound == 0) {
+
+                    printf("Sorry, name not found \n");
+                    
+
                 }
 
 
@@ -867,7 +941,7 @@ int main() {
                 return 0;
 
 
-            } else if(choice == 3 || choice == 4 || choice == 6 || choice == 7 || choice == 8) {
+            } else if(choice == 3 || choice == 4 || choice == 6 || choice == 8) {
 
                 // Not available in this build
                 printf("\nSorry, not available right now\n");
@@ -976,6 +1050,72 @@ int main() {
                 } else {
                     printf("Okay then! \n \n");
                     
+                }
+
+
+
+
+            } else if(choice == 7) {
+
+
+                printf("Enter an owner's name: ");
+                scanf("%s", searchName);
+
+                while ((c = getchar()) != '\n' && c != EOF);
+
+
+
+                move = start;
+
+                // Starts from the first entry, then moves through the linked list chain untill the end
+
+                while(move->next != NULL) {
+
+                    if(strcmp(searchName, move->owner) == 0) {
+
+                        printf("\nName Found!\n");
+                        printf("------------------------------\n\n");
+
+                        printf("Mechanic: %s  | Garage: %s  | Year: %d  | Make: %s | Model: %s | Owner: %s \n \n", move->mechanicName, move->garageName, move->year, move->make, move->model, move->owner);
+                        printf("Problem: %s \n", move->problem);
+                        printf("Part Needed: %s \n", move->partNeeded);
+                        printf("Part Cost: %.2f \n", move->partCost);
+                        printf("Hours Labored: %.2f\n", move->laborHours);
+                        printf("Final Cost: $%.2f \n \n", move->finalCost);
+
+                        printf("-------------------------------------------------------------------\n\n");
+
+                        searchFound = 1;
+
+                    }
+
+
+                    move = move->next;
+
+                }
+
+
+                // For the very last entry only
+
+                if(strcmp(searchName, move->owner) == 0) {
+
+                    printf("\nName Found!\n");
+                    printf("-----------------------------\n\n");
+
+                    printf("Mechanic: %s  | Garage: %s  | Year: %d  | Make: %s | Model: %s | Owner: %s \n \n", move->mechanicName, move->garageName, move->year, move->make, move->model, move->owner);
+                    printf("Problem: %s \n", move->problem);
+                    printf("Part Needed: %s \n", move->partNeeded);
+                    printf("Part Cost: %.2f \n", move->partCost);
+                    printf("Hours Labored: %.2f\n", move->laborHours);
+                    printf("Final Cost: $%.2f \n \n", move->finalCost);
+
+                    printf("-------------------------------------------------------------------\n\n");
+
+                } else if(searchFound == 0) {
+
+                    printf("Sorry, name not found \n");
+                    
+
                 }
 
 
