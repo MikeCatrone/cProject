@@ -72,7 +72,7 @@ int main() {
     if (startOption == 1) {
 
         // Loop will continue until user chooses to exit with 9
-        while(choice != 8) {
+        while(choice != 9) {
 
 
             printf("\n--- Garage Options ---\n");
@@ -675,7 +675,7 @@ int main() {
         // Insert Data here //
 
         // Loop will continue until user chooses to exit with 9
-        while(choice != 8) {
+        while(choice != 9) {
 
 
             printf("\n--- Garage Options ---\n");
